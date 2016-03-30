@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+{% load mybrand %}
+{# Display a form #}
+
+{% block main %}
+<div class="jumbotron">
+    <div class="container-fluid">
+        <h1>Hello, world!</h1>
+        <p>...</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button"
+        data-toggle="modal" data-target="#signupModal">Get In Touch</a></p>
+    </div>
+</div>
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Uplaod Photo</h4>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal" action="{% url 'brandid:home' %}"
+                method="POST" enctype="multipart/form-data">
+                   {% csrf_token %}
+               {% for field in contact_us %}
+               {# Standard Code for all the TextInput widgets in this app #}
+               {% if field.field.widget|klass == "TextInput" %}
+               <div class="fieldWrapper  form-group">
+                   <label class="col-md-2 control-label" for="{{ field.id_for_label }}">
+                   {{ field.label_tag }}{% if field.field.required %}<span class="asteriks"> *</span>{% endif %}</label>
+                   <div class="col-md-8">
+                       {% for error in field.errors %}
+                       <p id="required">{{ error }}</p>
+                       {% endfor %}
+                   <input id="{{ field.id_for_label }}" name="{{ field.html_name }}"
+                       placeholder = "" class="form-control input-md startup-input"
+                       type="text" type="text" {% if field.field.required %} required {% endif %}
+                          {% if field.field.regex %} pattern="^([0|\+[0-9]{1,5})?([1-9][0-9]{9})$"
+                          title="Enter The correct phone number correctly"{% endif %}>
+                       <span class="help-block">{{ field.help_text }}</span>
+                   </div>
+               </div>
+               {% endif %}
+               {# Standard Code for all the Textarea widgets in this app #}
+               {% if field.field.widget|klass == "Textarea" %}
+               <div class=" fieldWrapper form-group">
+                 <label class="col-md-2 control-label" for="{{ field.id_for_label }}">{{ field.label_tag }}
+                 {% if field.field.required %}<span class="asteriks"> *</span>{% endif %}</label>
+                 <div class="col-md-8">
+                   {% for error in field.errors %}
+                   <p id="required">{{ error }}</p>
+                   {% endfor %}
+                   <textarea class="form-control startup-input" id="{{ field.id_for_label }}"
+                   name="{{ field.html_name }}"></textarea>
+                   <span class="help-block">{{ field.help_text }}</span>
+                 </div>
+               </div>
+               {% endif %}
+               {% if field.field.widget|klass == "EmailInput" %}
+               <div class="fieldWrapper  form-group">
+                   <label class="col-md-2 control-label" for="{{ field.id_for_label }}">
+                   {{ field.label_tag }}{% if field.field.required %}<span class="asteriks"> *</span>{% endif %}</label>
+                   <div class="col-md-8">
+                       {% for error in field.errors %}
+                       <p id="required">{{ error }}</p>
+                       {% endfor %}
+                   <input id="{{ field.id_for_label }}" name="{{ field.html_name }}"
+                       placeholder = "" class="form-control input-md startup-input"
+                       type="email">
+                       <span class="help-block">{{ field.help_text }}</span>
+                   </div>
+               </div>
+               {% endif %}
+               {% endfor %}
+               <!-- Button -->
+               <div class="form-group">
+                 <label class="col-md-2 control-label" for="submit"></label>
+                 <div class="col-md-8">
+                   <!--<button id="submit" name="submit" class="btn btn-primary admin-button">Submit</button>-->
+                   <input class="btn btn-primary" type="submit" value="Get In Touch">
+                 </div>
+               </div>
+               </form>
+        </div>
+      </div>
+    </div>
+</div>                    
+                            
+<div class="container-fluid">
+    <div class="row">
+        <p>Our Services</p>
+        <div class="col-md-4">
+            <p>Creative Designs</p>
+            <ul class="list-unstyled">
+                <li>Logo Design</li>
+                <li>Web Design</li>
+                <li>Mobile App Design</li>
+                <li>Print Design</li>
+                <li>Co-operate branding</li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <p>Software Development</p>
+            <ul class="list-unstyled">
+                <li>Web Development</li>
+                <li>Mobile App Development</li>
+                <li>E-commerce Development</li>
+                <li>Desktop Application</li>
+                <li>Enterprise Software</li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <p>Cloud Services</p>
+            <ul class="list-unstyled">
+                <li>Cloud Deployment</li>
+                <li>Database Migration</li>
+            </ul>
+        </div>
+    </div>
+        <div class="row">
+        <div class="col-md-8 col-md-push-2">
+            <p>Industries We Serve</p>
+            <ul class="list-inline">
+                <li>E-commerce</li>
+                <li>Church</li>
+                <li>Corperate</li>
+                <li>Small Businesses</li>
+                <li>Education</li>
+                <li>Government</li>
+                <li>NGO's</li>
+                <li>Startups</li>
+            </ul>
+        </div>  
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-push-2">
+            <p>Our Technologies</p>
+            <ul class="list-inline">
+                <li>Python</li>
+                <li>Django</li>
+                <li>Javascript</li>
+                <li>C#</li>
+                <li>HTML & CSS</li>
+                <li>Bootstrap</li>
+                <li>Angular JS</li>
+                <li>Node.js</li>
+                <li>JQuery & JQuery UI</li>
+                <li>MySQL</li>
+                <li>AWS</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-push-2">
+            <p>About US</p>
+            <p>Lorem Ipsum is simply dummy text of the printing and
+            typesetting industry. Lorem Ipsum has been the industry's
+            standard dummy text ever since the 1500s, when an unknown
+            printer took a galley of type and scrambled it to make
+            a type specimen book. It has survived not only five centuries,
+            but also the leap into electronic typesetting, remaining
+            essentially unchanged. It was popularised in the 1960s
+            with the release of Letraset sheets containing Lorem Ipsum
+            passages, and more recently with desktop publishing software
+            like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-push-2">
+            <p>We are Social</p>
+            <ul class="list-inline">
+                <li><a href="#" target="_blank">
+                <i class="fa fa-facebook-official fa-5x"></i></a></li>
+                <li><a href="#" target="_blank"><i class="fa fa-twitter-square fa-4x"></i></a></li>   
+                <li><a href="#" target="_blank"><i class="fa fa-instagram fa-3x"></i></a></li>
+                <li><a href="#" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
+                <li><a href="#" target="_blank"><i class="fa fa-google-plus-square"></i></a></li>
+            </ul>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-push-2">
+            <p>Our Location</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-map-marker"></i> 10 Sule Abukar Crescent Off Opebi Road Lagos</li>
+                        <li><i class="fa fa-phone-square"></i> +2348039290063</li>
+                        <li><i class="fa fa-envelope"></i> contact@brandid.com.ng</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="row">
+    <div class="col-md-8 col-md-push-2">
+        <form class="form-horizontal" action="{% url 'brandid:home' %}"
+         method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in contact_us %}
+        {# Standard Code for all the TextInput widgets in this app #}
+        {% if field.field.widget|klass == "TextInput" %}
+        <div class="fieldWrapper  form-group">
+            <label class="col-md-2 control-label" for="{{ field.id_for_label }}">
+            {{ field.label_tag }}{% if field.field.required %}<span class="asteriks"> *</span>{% endif %}</label>
+            <div class="col-md-8">
+                {% for error in field.errors %}
+                <p id="required">{{ error }}</p>
+                {% endfor %}
+            <input id="{{ field.id_for_label }}" name="{{ field.html_name }}"
+                placeholder = "" class="form-control input-md startup-input"
+                type="text" type="text" {% if field.field.required %} required {% endif %}
+                          {% if field.field.regex %} pattern="^([0|\+[0-9]{1,5})?([1-9][0-9]{9})$"
+                   title="Enter The correct phone number correctly"{% endif %}>
+                <span class="help-block">{{ field.help_text }}</span>
+            </div>
+        </div>
+        {% endif %}
+        {# Standard Code for all the Textarea widgets in this app #}
+        {% if field.field.widget|klass == "Textarea" %}
+        <div class=" fieldWrapper form-group">
+          <label class="col-md-2 control-label" for="{{ field.id_for_label }}">{{ field.label_tag }}
+          {% if field.field.required %}<span class="asteriks"> *</span>{% endif %}</label>
+          <div class="col-md-8">
+            {% for error in field.errors %}
+            <p id="required">{{ error }}</p>
+            {% endfor %}
+            <textarea class="form-control startup-input" id="{{ field.id_for_label }}"
+            name="{{ field.html_name }}"></textarea>
+            <span class="help-block">{{ field.help_text }}</span>
+          </div>
+        </div>
+        {% endif %}
+        {# Standard Code for all the Email widgets in this app #}
+        {% if field.field.widget|klass == "EmailInput" %}
+        <div class="fieldWrapper  form-group">
+            <label class="col-md-2 control-label" for="{{ field.id_for_label }}">
+            {{ field.label_tag }}{% if field.field.required %}<span class="asteriks"> *</span>{% endif %}</label>
+            <div class="col-md-8">
+                {% for error in field.errors %}
+                <p id="required">{{ error }}</p>
+                {% endfor %}
+            <input id="{{ field.id_for_label }}" name="{{ field.html_name }}"
+                placeholder = "" class="form-control input-md startup-input"
+                type="email">
+                <span class="help-block">{{ field.help_text }}</span>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        <!-- Button -->
+        <div class="form-group">
+          <label class="col-md-2 control-label" for="submit"></label>
+          <div class="col-md-8">
+            <!--<button id="submit" name="submit" class="btn btn-primary admin-button">Submit</button>-->
+            <input class="btn btn-primary" type="submit" value="Get In Touch">
+          </div>
+        </div>
+        </form>
+    </div>
+</div>
+</div>
+{% endblock main %}

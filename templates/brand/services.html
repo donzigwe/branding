@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load mybrand %}
+{% block main %}
+<div class="jumbotron">
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <h3>Services</h3>
+            <p>...</p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button"
+            data-toggle="modal" data-target="#signupModal">Get in Touch</a></p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-push-2">
+            <ul class="row">
+                <div class="col-md-4">
+                    <h3>Services</h3>
+                    <p>Creative Designs</p>
+            <ul class="list-unstyled">
+                <li><a href="{% url 'brandid:logo_design' %}">Logo Design</a></li>
+                <li><a href="{% url 'brandid:web_design' %}">Web Design</a></li>
+                <li><a href="{% url 'brandid:mobile_app_design' %}">Mobile App Design</a></li>
+                <li><a href="{% url 'brandid:print_design' %}">Print Design</a></li>
+                <li><a href="{% url 'brandid:corperate_branding' %}">Corperate branding</a></li>
+                <li><a href="{% url 'brandid:social_media_branding' %}">Social Media Branding</a></li>
+
+            </ul>
+            <p>Software Development</p>
+            <ul class="list-unstyled">
+                <li><a href="{% url 'brandid:web_development' %}">Web Development</a></li>
+                <li><a href="{% url 'brandid:mobile_app_development' %}">Mobile App Development</a></li>
+                <li><a href="{% url 'brandid:ecommerce_development' %}">E-commerce Development</a></li>
+                <li><a href="{% url 'brandid:enterprise_software' %}">Enterprise Software</a></li>
+            </ul>
+            <p>Cloud Services</p>
+            <ul class="list-unstyled">
+                <li><a href="{% url 'brandid:cloud_deployment' %}">Cloud Deployment</a></li>
+                <li><a href="{% url 'brandid:database_migration' %}">Database Migration</a></li>
+            </ul>
+                </div>
+                <div class="col-md-4">
+                    <p>Industries We Serve</p>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'brandid:ecommerce' %}">E-commerce</a></li>
+                        <li><a href="{% url 'brandid:churches' %}">Church</a></li>
+                        <li><a href="{% url 'brandid:corperate' %}">Corperate</a></li>
+                        <li><a href="{% url 'brandid:small_businessess' %}">Small Businesses</a></li>
+                        <li><a href="{% url 'brandid:education' %}">Education</a></li>
+                        <li><a href="{% url 'brandid:government' %}">Government</a></li>
+                        <li><a href="{% url 'brandid:ngos' %}">NGO's</a></li>
+                        <li><a href="{% url 'brandid:startups' %}">Startups</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <p>Our Technologies</p>
+                        <ul class="list-unstyled">
+                            <li>Python</li>
+                            <li>Django</li>
+                            <li>Javascript</li>
+                            <li>C#</li>
+                            <li>HTML & CSS</li>
+                            <li>Bootstrap</li>
+                            <li>Angular JS</li>
+                            <li>Node.js</li>
+                            <li>JQuery & JQuery UI</li>
+                            <li>MySQL</li>
+                            <li>AWS</li>
+                        </ul>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Uplaod Photo</h4>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal" action="{% url 'brandid:services' %}"
+                method="POST" enctype="multipart/form-data">
+                   {% csrf_token %}
+               {% for field in contact_us %}
+               {# Standard Code for all the TextInput widgets in this app #}
+               {% if field.field.widget|klass == "TextInput" %}
+               <div class="fieldWrapper  form-group">
+                   <label class="col-md-2 control-label" for="{{ field.id_for_label }}">
+                   {{ field.label_tag }}{% if field.field.required %}<span class="asteriks"> *</span>{% endif %}</label>
+                   <div class="col-md-8">
+                       {% for error in field.errors %}
+                       <p id="required">{{ error }}</p>
+                       {% endfor %}
+                   <input id="{{ field.id_for_label }}" name="{{ field.html_name }}"
+                       placeholder = "" class="form-control input-md startup-input"
+                       type="text" {% if field.field.required %} required {% endif %}
+                          {% if field.field.regex %} pattern="^([0|\+[0-9]{1,5})?([1-9][0-9]{9})$" title="Enter The correct phone number correctly"{% endif %}>
+                       <span class="help-block">{{ field.help_text }}</span>
+                   </div>
+               </div>
+               {% endif %}
+               {# Standard Code for all the Textarea widgets in this app #}
+               {% if field.field.widget|klass == "Textarea" %}
+               <div class=" fieldWrapper form-group">
+                 <label class="col-md-2 control-label" for="{{ field.id_for_label }}">{{ field.label_tag }}
+                 {% if field.field.required %}<span class="asteriks"> *</span>{% endif %}</label>
+                 <div class="col-md-8">
+                   {% for error in field.errors %}
+                   <p id="required">{{ error }}</p>
+                   {% endfor %}
+                   <textarea class="form-control startup-input" id="{{ field.id_for_label }}"
+                   name="{{ field.html_name }}"></textarea>
+                   <span class="help-block">{{ field.help_text }}</span>
+                 </div>
+               </div>
+               {% endif %}
+               {% if field.field.widget|klass == "EmailInput" %}
+               <div class="fieldWrapper  form-group">
+                   <label class="col-md-2 control-label" for="{{ field.id_for_label }}">
+                   {{ field.label_tag }}{% if field.field.required %}<span class="asteriks"> *</span>{% endif %}</label>
+                   <div class="col-md-8">
+                       {% for error in field.errors %}
+                       <p id="required">{{ error }}</p>
+                       {% endfor %}
+                   <input id="{{ field.id_for_label }}" name="{{ field.html_name }}"
+                       placeholder = "" class="form-control input-md startup-input"
+                       type="email">
+                       <span class="help-block">{{ field.help_text }}</span>
+                   </div>
+               </div>
+               {% endif %}
+               {% endfor %}
+               <!-- Button -->
+               <div class="form-group">
+                 <label class="col-md-2 control-label" for="submit"></label>
+                 <div class="col-md-8">
+                   <!--<button id="submit" name="submit" class="btn btn-primary admin-button">Submit</button>-->
+                   <input class="btn btn-primary" type="submit" value="Get In Touch">
+                 </div>
+               </div>
+               </form>
+        </div>
+      </div>
+    </div>
+</div>    
+{% endblock main %}

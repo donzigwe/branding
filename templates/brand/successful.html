@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 col-md-push-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p>Hi {{ full_name }} We will get across to you shortly</p>
+                    <a class="btn btn-primary" href="{% url 'brandid:home' %}" role="button">OK</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}

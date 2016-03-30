@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load mybrand %}
+{% block main %}
+
+<div class="jumbotron">
+    <div class="container-fluid">
+        <h3>Transforming great ideas into a beautiful product and a successful business<br>
+        <small>We are your partners without stake, don't let that idea seat in your head. we
+        are eager to partner with you to realize your it, from concept to execution.
+        <br> Think it we build it.</small></h3>
+        <p>...</p>
+    </div>
+</div>
+    <div class="row">
+        <div class="col-md-8 col-md-push-2">
+            <p>How it works</p>
+            <ul class="list-inline">
+                <li>Share your idea</li>
+                <li>Have a one on one discussion with us</li>
+                <li>Get time and price estimate</li>
+                <li>Sign our contract</li>
+                <li>Get Your MVP</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-push-2">
+            <p>Need a Web or a Mobile App? Tell us about it.</p>
+            <form class="form-horizontal" action="{% url 'brandid:startup_mvps' %}"
+                 method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in contact_us %}
+                {# Standard Code for all the TextInput widgets in this app #}
+                {% if field.field.widget|klass == "TextInput" %}
+                <div class="fieldWrapper  form-group">
+                    <label class="col-md-2 control-label" for="{{ field.id_for_label }}">
+                    {{ field.label_tag }}{% if field.field.required %}<span class="asteriks"> *</span>{% endif %}</label>
+                    <div class="col-md-8">
+                        {% for error in field.errors %}
+                        <p id="required">{{ error }}</p>
+                        {% endfor %}
+                    <input id="{{ field.id_for_label }}" name="{{ field.html_name }}"
+                        placeholder = "" class="form-control input-md startup-input"
+                        type="text" type="text" {% if field.field.required %} required {% endif %}
+                          {% if field.field.regex %} pattern="^([0|\+[0-9]{1,5})?([1-9][0-9]{9})$"
+                           title="Enter The correct phone number correctly"{% endif %}>
+                        <span class="help-block">{{ field.help_text }}</span>
+                    </div>
+                </div>
+                {% endif %}
+                {# Standard Code for all the Textarea widgets in this app #}
+                {% if field.field.widget|klass == "Textarea" %}
+                <div class=" fieldWrapper form-group">
+                  <label class="col-md-2 control-label" for="{{ field.id_for_label }}">{{ field.label_tag }}
+                  {% if field.field.required %}<span class="asteriks"> *</span>{% endif %}</label>
+                  <div class="col-md-8">
+                    {% for error in field.errors %}
+                    <p id="required">{{ error }}</p>
+                    {% endfor %}
+                    <textarea class="form-control startup-input" id="{{ field.id_for_label }}"
+                    name="{{ field.html_name }}"></textarea>
+                    <span class="help-block">{{ field.help_text }}</span>
+                  </div>
+                </div>
+                {% endif %}
+                {# Standard Code for all the Email widgets in this app #}
+                {% if field.field.widget|klass == "EmailInput" %}
+                <div class="fieldWrapper  form-group">
+                    <label class="col-md-2 control-label" for="{{ field.id_for_label }}">
+                    {{ field.label_tag }}{% if field.field.required %}<span class="asteriks"> *</span>{% endif %}</label>
+                    <div class="col-md-8">
+                        {% for error in field.errors %}
+                        <p id="required">{{ error }}</p>
+                        {% endfor %}
+                    <input id="{{ field.id_for_label }}" name="{{ field.html_name }}"
+                        placeholder = "" class="form-control input-md startup-input"
+                        type="email">
+                        <span class="help-block">{{ field.help_text }}</span>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                <!-- Button -->
+                <div class="form-group">
+                  <label class="col-md-2 control-label" for="submit"></label>
+                  <div class="col-md-8">
+                    <!--<button id="submit" name="submit" class="btn btn-primary admin-button">Let's Discuss</button>-->
+                    <input class="btn btn-primary" type="submit" value="Get In Touch">
+                  </div>
+                </div>
+                </form>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

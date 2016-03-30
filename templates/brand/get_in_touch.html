@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Uplaod Photo</h4>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal" action="{% url 'brandid:get_in_touch' %}"
+                method="POST" enctype="multipart/form-data">
+                   {% csrf_token %}
+               {% for field in contact_us %}
+               {# Standard Code for all the TextInput widgets in this app #}
+               {% if field.field.widget|klass == "TextInput" %}
+               <div class="fieldWrapper  form-group">
+                   <label class="col-md-2 control-label" for="{{ field.id_for_label }}">
+                   {{ field.label_tag }}{% if field.field.required %}<span class="asteriks"> *</span>{% endif %}</label>
+                   <div class="col-md-8">
+                       {% for error in field.errors %}
+                       <p id="required">{{ error }}</p>
+                       {% endfor %}
+                   <input id="{{ field.id_for_label }}" name="{{ field.html_name }}"
+                       placeholder = "" class="form-control input-md startup-input"
+                       type="text">
+                       <span class="help-block">{{ field.help_text }}</span>
+                   </div>
+               </div>
+               {% endif %}
+               {# Standard Code for all the Textarea widgets in this app #}
+               {% if field.field.widget|klass == "Textarea" %}
+               <div class=" fieldWrapper form-group">
+                 <label class="col-md-2 control-label" for="{{ field.id_for_label }}">{{ field.label_tag }}
+                 {% if field.field.required %}<span class="asteriks"> *</span>{% endif %}</label>
+                 <div class="col-md-8">
+                   {% for error in field.errors %}
+                   <p id="required">{{ error }}</p>
+                   {% endfor %}
+                   <textarea class="form-control startup-input" id="{{ field.id_for_label }}"
+                   name="{{ field.html_name }}"></textarea>
+                   <span class="help-block">{{ field.help_text }}</span>
+                 </div>
+               </div>
+               {% endif %}
+               {% if field.field.widget|klass == "EmailInput" %}
+               <div class="fieldWrapper  form-group">
+                   <label class="col-md-2 control-label" for="{{ field.id_for_label }}">
+                   {{ field.label_tag }}{% if field.field.required %}<span class="asteriks"> *</span>{% endif %}</label>
+                   <div class="col-md-8">
+                       {% for error in field.errors %}
+                       <p id="required">{{ error }}</p>
+                       {% endfor %}
+                   <input id="{{ field.id_for_label }}" name="{{ field.html_name }}"
+                       placeholder = "" class="form-control input-md startup-input"
+                       type="text">
+                       <span class="help-block">{{ field.help_text }}</span>
+                   </div>
+               </div>
+               {% endif %}
+               {% endfor %}
+               <!-- Button -->
+               <div class="form-group">
+                 <label class="col-md-2 control-label" for="submit"></label>
+                 <div class="col-md-8">
+                   <button id="submit" name="submit" class="btn btn-primary admin-button">Submit</button>
+                 </div>
+               </div>
+               </form>
+        </div>
+      </div>
+    </div>
+</div> 
+{% endblock main %}
