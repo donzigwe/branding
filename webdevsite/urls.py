@@ -24,3 +24,4 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^brandid/', include('brandid.urls')),
 ]
+

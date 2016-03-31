@@ -1,16 +1,6 @@
 from django import forms
 from brandid.models import *
 
-class TalkForm(forms.ModelForm):
-    name =          forms.CharField()
-    email =         forms.EmailField()
-    phone_number =  forms.RegexField(regex=r'^\+?1?\d{9,15}$')
-        
-    class Meta:
-        model = Talk
-        fields = ('name', 'email', 'phone_number')
-    
-
 class ContactForm(forms.ModelForm):
     name =          forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Full Name'}))
     email =         forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
