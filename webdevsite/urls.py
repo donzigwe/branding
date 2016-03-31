@@ -17,9 +17,10 @@ Including another URLconf
 from django.conf.urls import url, include, patterns
 from django.contrib import admin
 from django.conf import settings
-
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
+    url(r'^$', RedirectView.as_view(url='/home/')),
     url(r'^admin/', admin.site.urls),
     url(r'^brandid/', include('brandid.urls')),
 ]
