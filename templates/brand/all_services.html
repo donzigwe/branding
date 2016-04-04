@@ -2,16 +2,22 @@
 
 {% block main %}
 
-{% if logo_design %}
+{% if logo_design1 or logo_design %}
 <div class="jumbotron">
     <div class="container-fluid">
         <div class="container-fluid">
             <h3>Logo Design</h3>
+            <h3>Behind every proffessional logo there is a story.<br>
+            <small>We design logo that projects the right brand image
+            and communicate the right message.</small></h3>
             
-            <p>...</p>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
         </div>
     </div>
+</div>
+<div class="container-fluid">
+    {% block services %}{% endblock services %}
+
+
 </div>
 {% endif %}
 
@@ -20,6 +26,7 @@
     <div class="container-fluid">
         <div class="container-fluid">
             <h3>Web Design</h3>
+            <h3>Designs that do not discrimate base on platform </h3>
             
             <p>...</p>
             <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
@@ -59,19 +66,6 @@
     <div class="container-fluid">
         <div class="container-fluid">
             <h3>Corperate Branding</h3>
-            
-            <p>...</p>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-        </div>
-    </div>
-</div>
-{% endif %}
-
-{% if social_media_branding %}
-<div class="jumbotron">
-    <div class="container-fluid">
-        <div class="container-fluid">
-            <h3>Social Media Branding</h3>
             
             <p>...</p>
             <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
@@ -268,35 +262,65 @@
     {% if logo_design %}
     <div class="row">
         <div class="col-md-8 col-md-push-2">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum.</p>
+            <p>
+            At BrandID we don just design logos to to look beautiful,
+            we design log to reflect your business brand promise, values, business
+            model, your services, yopur competition and other factors sorrounding
+            your business and product.
+            We have a team of dedicated logo analyst whose core job is to work with the
+            information provided to us in other to produce a logo with the right image
+            and message.
+            Our detailed questionnaire ask pertinent and important question that provides
+            us the right information to design your logo
+            Our logos are very professional and affordable, starting from =N=10,000 and we
+            deliver based on an agreed timeline. To ensure 100% satisfaction, we give room for
+            our customers to review their logos and ask for changes.
+            </p>
             <p>How It works</p>
             <ul class="list-inline">
-                <li>Give us the detail of your business</li>
-                <li>Pay 50% of agreed cost</li>
-                <li>Select a logo from the samples made</li>
-                <li>We perfect it to your taste</li>
+                <li>Complete our questionnaire</li>
+                <li>We design base on your answers</li>
+                <li>Review the design and ask for changes</li>
+                <li>We perfect logo and make it yours</li>
             </ul>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-4 col-md-push-5">
+            <a class="btn btn-primary btn-lg" href="{% url 'brandid:logo_company' %}" role="button">Let's Design Your Logo</a>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4 col-md-push-5">
+            <p>Why You should use BrandID</p>
+            <ul class="list-unstyled">
+                <li>Flexible Pricing <br><small>Our logos
+                starts at a very low price</small></li>
+                <li>Fast Delivery<br><small>Our logos can be delivered to
+                you in hours</small></li>
+                <li>Proper Analysis<br><small>We take time to analy</small></li>
+                <li>100% Money back guarantee<br><small>If you don't get what you want,
+                request for your refund</small></li>
+            </ul>
+        </div>
+    </div>
+    
     {% endif %}
     {% if web_design %}
     <div class="row">
         <div class="col-md-8 col-md-push-2">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum.</p>
+            <p>Responsive designs are designs that can fit and adjust into any form of devices screen,
+            be it smartphone, tablet, mini-tablet and computers of different sizes.
+            This can be achieved using modern web design technologies like HTML5, Bootstrap,
+            CSS Media Queries, JQuery and Javascript. With huge number of smart phone users,
+            we employ mobile first approach in the design of our clients web site. 
+            When we complete a project, we carry out thorough testing to ensure that your website
+            loads and renders well in all devices and browser type.
+            At BrandID we carter for all businesses and organisations, from your personal
+            blog to your company or organisation website. Our innovative web design
+            helps to realise a visually stunning and practical website and  our client
+            business objective.</p>
         </div>
     </div>
     {% endif %}
@@ -346,32 +370,27 @@
     </div>
     {% endif %}
     
-    {% if corperate_branding %}
-    <div class="row">
-        <div class="col-md-8 col-md-push-2">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum.</p>
-        </div>
-    </div>
-    {% endif %}
-    
     {% if web_development %}
     <div class="row">
         <div class="col-md-8 col-md-push-2">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum.</p>
+            <p>
+            
+            In today's technology-driven world where almost anything and everything can be accessible
+            through internet services. Websites are now an integral part part of our lives and now serves
+            as a medium through which we can connect to services, transact business and socialise. They
+            gives our businesses the necessary empowerment, which it can use to break different barriers
+            and reach our target audience irrespective of geographical locations.
+            
+            For a competent business advantage, it is imperative to develop a powerful and dynamic
+            website, and we, at BrandID, provide you with world class web development service
+ 
+            Our web applications are scalable and are built on agile framework and technology. 
+            With a team of programmers with average of 4 years, we carter for businesses in a
+            variety of domain,  which include and not limited to News and Media, entertainment,
+            learning, ticketing services, manufacturing, e-commerce and more. 
+            We adhere strictly agile principle throughout the development and deployment process,
+            meaning that your will be an active participant throughout the process.
+            </p>
         </div>
     </div>
     {% endif %}
@@ -379,14 +398,16 @@
     {% if mobile_app_development %}
     <div class="row">
         <div class="col-md-8 col-md-push-2">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum.</p>
+            <p>BrandID is your one stop shop for your mobile app development, we committed to
+            unleashing our mobile app expertise on our clients projects.
+            At BrandID our core focus is to help you drive your business and provide excellent
+            service to your customers through stunning and useful mobile apps.
+            As a company that is aware of the trend in mobile application technology, we are
+            aware that mobile app would continue to dominate our lives activities, let us
+            know your idea and work with you on base on current and future trend.
+            We have a team of mobile app developer that will transform your wonderful and
+            innovative ideas into an exceptional app with advanced functionalities and features
+            that your users will love</p>
         </div>
     </div>
     {% endif %}

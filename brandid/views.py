@@ -1,6 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from brandid.models import *
 from brandid.forms import *
+import datetime
+from datetime import timedelta, date
+import random
 
 def home(request):
     if request.method == "POST":
@@ -50,6 +53,51 @@ def services(request):
     else:
         contact_form = ContactForm()
     return render(request, 'brand/services.html', {'contact_us':contact_form})
+
+def logo_id():
+    date = str(datetime.datetime.now())[2:10]
+    date = date.replace('-', '')
+    randnum = str(random.random())[4:8]
+    id_num = 'logo' + date + randnum
+    return id_num
+
+print logo_id()
+
+def logo_company(request):
+    if request.method == "POST":
+        company_form = LogoCompanyForm(request.POST, request.FILES)
+        if company_form.is_valid():
+            company = company_form.save(commit=False)
+            my_logo = logo_id()
+            company.logo_id = my_logo
+            request.session['my_logo'] = my_logo
+            company.save()
+            print 'I want to print this ID', request.session['my_logo']
+            return redirect('brandid:logo_project')
+        else:
+            print company_form.errors
+    else:
+        company_form = LogoCompanyForm()
+    logo_design = 'logo_design1'
+    context = {'company_form':company_form, 'logo_design1':logo_design}
+    return render(request, 'brand/logo_form.html', context)
+
+def logo_project(request):
+    mycompany = get_object_or_404(LogoCompany, logo_id=request.session['my_logo'])
+    if request.method == "POST":
+        project_form = LogoProjectForm(request.POST, request.FILES)
+        if project_form.is_valid():
+            project = project_form.save(commit=False)
+            project.company = mycompany
+            project.save()
+            return redirect('brandid:logo_design')
+        else:
+            print 'print my errors', project_form.errors
+    else:
+        project_form = LogoProjectForm()
+    logo_design = 'logo_design1'
+    context = {'project_form':project_form, 'logo_design1':logo_design}
+    return render(request, 'brand/logo_form.html', context)
 
 
 def about_us(request):

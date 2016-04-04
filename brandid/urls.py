@@ -32,8 +32,8 @@ urlpatterns = [
     url(r'^startups/$', views.startups, name='startups'),
     url(r'^social_media_branding/$', views.social_media_branding, name='social_media_branding'),
     url(r'^about_us/$', views.about_us, name='about_us'),
-    # url(r'^get_in_touch/$', views.get_in_touch, name='get_in_touch'),
-    # url(r'^get_in_touch2/$', views.get_in_touch2, name='get_in_touch2'),
+    url(r'^logo_company/$', views.logo_company, name='logo_company'),
+    url(r'^logo_project/$', views.logo_project, name='logo_project'),
 
 
     ]

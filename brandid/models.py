@@ -16,22 +16,27 @@ class Contact(models.Model):
     def __unicode__(self):
         return '%s %s' %(self.name, self.phone_number)
     
-class LogoComapny(models.Model):
+class LogoCompany(models.Model):
+    logo_id =           models.CharField(max_length=30)
     full_name =         models.CharField(max_length=50)
     email =             models.EmailField()
     phone_number =      models.CharField(max_length=50)
     description =       models.TextField()
     old_logo =          models.BooleanField()
-    upload_old_logo =   models.ImageField(upload_to="old_logo")
+    upload_old_logo =   models.ImageField(upload_to="old_logo", blank=True, null=True)
     reason_logo =       models.TextField()
     target_audience =   models.TextField()
     competition =       models.BooleanField()
     desc_competition =  models.TextField()
     
-    def __init__(self):
-        return '%s %s %s' %(self.full_name, self.phone_number)
+    # def __init__(self):
+    #     return '%s %s' %(self.full_name, self.phone_number)
+    def __unicode__(self):
+        'Unicode string conversion'
+        return "%s %s %s" %(self.logo_id, self.full_name, self.phone_number)
     
 class LogoProject(models.Model):
+    company =           models.ForeignKey(LogoCompany)
     tagline =           models.CharField(max_length=120)
     include_tagline =   models.BooleanField()
     imagery =           models.TextField()
@@ -48,8 +53,12 @@ class LogoProject(models.Model):
     other_services =    models.TextField()
     inspired_logos =    models.TextField()
     
-    def __init__(self):
-        return '%s %s %s %s %s' %(self.tagline, self.logo_adjective, self.typography,
+    # def __init__(self):
+    #     return '%s %s %s %s %s' %(self.tagline, self.logo_adjective, self.typography,
+    #                               self.logo_location, self.budget)
+    def __unicode__(self):
+        'Unicode string conversion'
+        return "%s %s %s %s %s" %(self.tagline, self.logo_adjective, self.typography,
                                   self.logo_location, self.budget)
     
     
